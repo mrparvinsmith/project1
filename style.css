@@ -1,22 +1,22 @@
 body {
   background: #0088ff;
+  text-align: center;
 }
 .board {
   margin: 0 auto;
-  width: 804px;
+  display: inline-block;
 }
 .game-section {
   border: 1px solid black;
-  height: 350px;
-  width: 600px;
+  /*height: 338px;*/
   float: left;
 }
 .row {
-  float: left;
+  /*float: left;*/
 }
 .info {
   border: 1px solid black;
-  height: 350px;
+  height: 368px;
   width: 200px;
   float: left;
   position: relative;
@@ -30,6 +30,13 @@ body {
   position: absolute;
   bottom: 5px;
   left: 5px;
+}
+.card {
+  background: white;
+  height: 70px;
+  width: 70px;
+  margin: 10px;
+  float: left;
 }
 .hidden {
   border: 1px solid black;
