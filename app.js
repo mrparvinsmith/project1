@@ -30,14 +30,17 @@ var makeBoard = function(){
     $card1.addClass('hidden card');
     $card1.text(playArray[i]);
     $('.top').append($card1);
+
     var $card2 = $('<div>');
     $card2.addClass('hidden card');
     $card2.text(playArray[i + 1]);
     $('.mid-top').append($card2);
+
     var $card3 = $('<div>');
     $card3.addClass('hidden card');
     $card3.text(playArray[i + 2]);
     $('.mid-bottom').append($card3);
+
     var $card4 = $('<div>');
     $card4.addClass('hidden card');
     $card4.text(playArray[i + 3]);
@@ -46,9 +49,41 @@ var makeBoard = function(){
 };
 makeBoard();
 
-//On click, assign cards '.flipped' class
-  //Prevent more than 2 cards being flipped
-//If cards don't match, remove '.flipped' class from both cards
+var firstCard = '';
+var secondCard = '';
+var totalMatched = 0;
+
+var checkMatch = function(){
+  if(firstCard.textContent === secondCard.textContent){
+    $(firstCard).addClass('matched');
+    $(secondCard).addClass('matched');
+    totalMatched += 2;
+    if(totalMatched === playArray.length){
+      alert('You win!');
+    }
+  } else {
+    $(firstCard).addClass('hidden');
+    $(secondCard).addClass('hidden');
+    mistakeNum++;
+    mistakeCounter();
+  }
+  firstCard = '';
+  secondCard = '';
+};
+
+//On click, remove '.hidden' class
+$('.card').on('click', function(){
+  if(firstCard === '' && $(this).hasClass('hidden')){
+    $(this).removeClass('hidden');
+    firstCard = this;
+  } else if (secondCard === '' && $(this).hasClass('hidden')){
+    $(this).removeClass('hidden');
+    secondCard = this;
+    setTimeout(function(){checkMatch()}, 1000);
+  }
+});
+  //Prevent more than 2 cards being shown
+//If cards don't match, assign '.hidden' class on both cards
   //Increase mistake counter
 //If cards match, assign '.matched' class
   //If all cards are '.matched', declare winner
@@ -63,5 +98,8 @@ var mistakeCounter = function(){
 $('#reset').on('click', function(){
   $('.card').remove();
   makeBoard();
+  totalMatched = 0;
+  mistakeNum = 0;
+  mistakeCounter();
   alert('Board has been reset');
 });
