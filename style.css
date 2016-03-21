@@ -38,7 +38,7 @@ body {
 }
 .hidden {
   background: black;
-  color: black;
+  color: transparent;
 }
 .matched {
   background: green;

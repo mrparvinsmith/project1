@@ -22,7 +22,7 @@ var shuffle = function() {
   counter = playArray.length;
 };
 
-//Create rows and columns with shuffled cards
+//Makes a card in each row
 var makeBoard = function(){
   shuffle();
   for(var i = 0; i < (playArray.length - 3); i += 4){
@@ -55,15 +55,19 @@ var totalMatched = 0;
 
 var checkMatch = function(){
   if(firstCard.textContent === secondCard.textContent){
+    //If cards match, assign '.matched' class
     $(firstCard).addClass('matched');
     $(secondCard).addClass('matched');
     totalMatched += 2;
+    //If all cards are '.matched', declare winner
     if(totalMatched === playArray.length){
       alert('You win!');
     }
   } else {
+    //If cards don't match, hides both cards again
     $(firstCard).addClass('hidden');
     $(secondCard).addClass('hidden');
+    //Increase mistake counter
     mistakeNum++;
     mistakeCounter();
   }
@@ -82,11 +86,6 @@ $('.card').on('click', function(){
     setTimeout(function(){checkMatch()}, 1000);
   }
 });
-  //Prevent more than 2 cards being shown
-//If cards don't match, assign '.hidden' class on both cards
-  //Increase mistake counter
-//If cards match, assign '.matched' class
-  //If all cards are '.matched', declare winner
 
 //Mistake counter
 var mistakeNum = 0;
