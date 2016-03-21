@@ -19,6 +19,7 @@ var shuffle = function() {
      playArray[counter] = playArray[index];
      playArray[index] = temp;
   }
+  counter = playArray.length;
 };
 
 //Create rows and columns with shuffled cards
@@ -53,5 +54,14 @@ makeBoard();
   //If all cards are '.matched', declare winner
 
 //Mistake counter
+var mistakeNum = 0;
+var mistakeCounter = function(){
+  $('#mistake-counter').text(mistakeNum);
+};
 
-//Make a reset button that clears everything
+//Reset button that clears everything
+$('#reset').on('click', function(){
+  $('.card').remove();
+  makeBoard();
+  alert('Board has been reset');
+});

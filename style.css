@@ -8,11 +8,7 @@ body {
 }
 .game-section {
   border: 1px solid black;
-  /*height: 338px;*/
   float: left;
-}
-.row {
-  /*float: left;*/
 }
 .info {
   border: 1px solid black;
