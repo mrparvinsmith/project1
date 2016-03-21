@@ -15,13 +15,35 @@ var shuffle = function() {
   while (counter > 0) {
      var index = Math.floor(Math.random() * counter);
      counter--;
-     var temp = array[counter];
-     array[counter] = array[index];
-     array[index] = temp;
+     var temp = playArray[counter];
+     playArray[counter] = playArray[index];
+     playArray[index] = temp;
   }
 };
 
 //Create rows and columns with shuffled cards
+var makeBoard = function(){
+  shuffle();
+  for(var i = 0; i < (playArray.length - 3); i += 4){
+    var $card1 = $('<div>');
+    $card1.addClass('hidden');
+    $card1.text(playArray[i]);
+    $('.top').append($card1);
+    var $card2 = $('<div>');
+    $card2.addClass('hidden');
+    $card2.text(playArray[i + 1]);
+    $('.mid-top').append($card2);
+    var $card3 = $('<div>');
+    $card3.addClass('hidden');
+    $card3.text(playArray[i + 2]);
+    $('.mid-bottom').append($card3);
+    var $card4 = $('<div>');
+    $card4.addClass('hidden');
+    $card4.text(playArray[i + 3]);
+    $('.bottom').append($card4);
+  }
+};
+makeBoard();
 
 //On click, assign cards '.flipped' class
   //Prevent more than 2 cards being flipped

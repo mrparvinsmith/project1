@@ -1,12 +1,36 @@
+body {
+  background: #0088ff;
+}
+.board {
+  margin: 0 auto;
+  width: 804px;
+}
 .game-section {
   border: 1px solid black;
-  height: 100px;
-  width: 100px;
-  margin: 0 auto;
+  height: 350px;
+  width: 600px;
+  float: left;
+}
+.row {
+  float: left;
 }
 .info {
   border: 1px solid black;
-  height: 100px;
-  width: 100px;
-  margin: 0 auto;
+  height: 350px;
+  width: 200px;
+  float: left;
+  position: relative;
+}
+.mistake {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+#reset {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+.hidden {
+  border: 1px solid black;
 }
