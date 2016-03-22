@@ -21,6 +21,7 @@ body {
   position: absolute;
   left: 5px;
   top: 5px;
+  font-size: 24px;
 }
 #reset {
   position: absolute;
@@ -35,6 +36,7 @@ body {
   float: left;
   border: 1px solid black;
   transition: all 1.0s ease;
+  font-size: 60px;
 }
 .hidden {
   background: black;

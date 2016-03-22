@@ -75,7 +75,7 @@ var checkMatch = function(){
   secondCard = '';
 };
 
-//On click, remove '.hidden' class
+//On click, remove '.hidden' class; only hidden are clickable
 $('.card').on('click', function(){
   if(firstCard === '' && $(this).hasClass('hidden')){
     $(this).removeClass('hidden');
