@@ -45,9 +45,9 @@ body {
 .matched {
   background: green;
 }
-
-
-
-
+.winner {
+  margin-top: 98px;
+  font-size: 37px;
+}
 
 
