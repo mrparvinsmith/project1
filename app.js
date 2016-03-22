@@ -1,6 +1,16 @@
 $('.mistake').hide();
 
 var turnCount = 1.5;
+//Only shows turn if two-player
+var showTurn = function(){
+  if(turnCount % 1 === 0){
+    if(turnCount % 2 === 0){
+      $('.turn-display').text('Current turn: Player 2');
+    } else {
+      $('.turn-display').text('Current turn: Player 1');
+    }
+  }
+};
 
 var startGame = function(num){
   //Determines how many cards are used in play
@@ -68,7 +78,7 @@ var startGame = function(num){
     }
   };
 
-  //Says who the winner is
+  //Says who the winner is; blanks turn-display
   var announceWinner = function(){
     if(turnCount % 1 !== 0){
       $('.winner').text('You win!!!');
@@ -76,9 +86,10 @@ var startGame = function(num){
       $('.winner').text('It\'s a tie!');
     } else if(playerTwoMatched > playerOneMatched){
       $('.winner').html('Player 2 wins!!!<br>' + playerTwoMatched + ' to ' + playerOneMatched);
-    } else {
+    } else if(playerOneMatched > playerTwoMatched){
       $('.winner').html('Player 1 wins!!!<br>' + playerOneMatched + ' to ' + playerTwoMatched);
     }
+    $('.turn-display').text('');
   };
 
   var checkMatch = function(){
@@ -87,6 +98,7 @@ var startGame = function(num){
       $(firstCard).addClass('matched');
       $(secondCard).addClass('matched');
       givePoints();
+      showTurn();
       var totalMatched = 2 * (playerOneMatched + playerTwoMatched);
       //If all cards are '.matched', declare winner
       if(totalMatched === playArray.length){
@@ -99,6 +111,7 @@ var startGame = function(num){
       //Increase mistake counter
       mistakeNum++;
       mistakeCounter();
+      showTurn();
     }
     firstCard = '';
     secondCard = '';
@@ -123,6 +136,7 @@ var startGame = function(num){
     $('#mistake-counter').text(mistakeNum);
   };
   mistakeCounter();
+  showTurn();
 };
 
 //Selects how many cards will be played; shows relevent fields, hides irrelevent ones
