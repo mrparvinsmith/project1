@@ -1,5 +1,9 @@
+$('.mistake').hide();
+
+var turnCount = 1.5;
+
 var startGame = function(num){
-  //Determines how many cards are used in play; currently set as 16
+  //Determines how many cards are used in play
   var playArray = [];
   var fullArray = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12];
   var numOfCards = num;
@@ -52,17 +56,41 @@ var startGame = function(num){
 
   var firstCard = '';
   var secondCard = '';
-  var totalMatched = 0;
+  var playerOneMatched = 0;
+  var playerTwoMatched = 0;
+
+  //Award cards to player
+  var givePoints = function(){
+    if(turnCount % 2 === 0){
+      playerTwoMatched++;
+    } else {
+      playerOneMatched++;
+    }
+  };
+
+  //Says who the winner is
+  var announceWinner = function(){
+    if(turnCount % 1 !== 0){
+      $('.winner').text('You win!!!');
+    } else if(playerOneMatched === playerTwoMatched){
+      $('.winner').text('It\'s a tie!');
+    } else if(playerTwoMatched > playerOneMatched){
+      $('.winner').html('Player 2 wins!!!<br>' + playerTwoMatched + ' to ' + playerOneMatched);
+    } else {
+      $('.winner').html('Player 1 wins!!!<br>' + playerOneMatched + ' to ' + playerTwoMatched);
+    }
+  };
 
   var checkMatch = function(){
     if(firstCard.textContent === secondCard.textContent){
       //If cards match, assign '.matched' class
       $(firstCard).addClass('matched');
       $(secondCard).addClass('matched');
-      totalMatched += 2;
+      givePoints();
+      var totalMatched = 2 * (playerOneMatched + playerTwoMatched);
       //If all cards are '.matched', declare winner
       if(totalMatched === playArray.length){
-        $('.winner').show();
+        announceWinner();
       }
     } else {
       //If cards don't match, hides both cards again
@@ -74,11 +102,11 @@ var startGame = function(num){
     }
     firstCard = '';
     secondCard = '';
+    turnCount++;
   };
 
   //On click, remove '.hidden' class; only hidden are clickable
   $('.card').on('click', function(){
-    console.log('clicking');
     if(firstCard === '' && $(this).hasClass('hidden')){
       $(this).removeClass('hidden');
       firstCard = this;
@@ -96,29 +124,40 @@ var startGame = function(num){
   };
   mistakeCounter();
 };
-// startGame(12);
-$('.mistake').hide();
-$('.winner').hide();
 
+//Selects how many cards will be played; shows relevent fields, hides irrelevent ones
 $('.number').on('click',function(){
   var num = $(this).text();
   $('.number').hide();
   $('h1').hide();
+  $('p').hide();
+  $('h3').hide();
   $('.mistake').show();
   $('.game-section').show();
   startGame(num);
 });
 
+//Selects number of players; default is one
+$('p').on('click', function(){
+  if($(this).hasClass('one')){
+    $('#one-player').html('&#10003');
+    $('#two-player').html('');
+    turnCount = 1.5;
+  } else {
+    $('#two-player').html('&#10003');
+    $('#one-player').html('');
+    turnCount = 1;
+  }
+});
+
 //Reset button that clears everything
 $('#reset').on('click', function(){
   $('.card').remove();
-  // makeBoard();
-  // totalMatched = 0;
-  // mistakeNum = 0;
-  // mistakeCounter();
   $('.mistake').hide();
-  $('.winner').hide();
+  $('.winner').text('');
   $('.game-section').hide();
   $('h1').show();
   $('.number').show();
+  $('h3').show();
+  $('p').show();
 });
