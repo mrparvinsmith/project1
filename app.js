@@ -1,5 +1,4 @@
-// $('.mistake').hide();
-// $('.mistake2P').hide();
+var intervalId = '';
 
 var turnCount = 1.5;
 //Only shows turn if two-player
@@ -65,6 +64,21 @@ var startGame = function(num){
   };
   makeBoard();
 
+  //The timer
+  var time = 0;
+  var showTime = function(){
+    $('.timer').text(time + ' seconds');
+  };
+  showTime();
+    var startTimer = function(){
+    if(intervalId === ''){
+      intervalId = setInterval(function(){
+        time++;
+        showTime();
+      }, 1000);
+    }
+  };
+
   var firstCard = '';
   var secondCard = '';
   var playerOneMatched = 0;
@@ -90,6 +104,7 @@ var startGame = function(num){
     } else if(playerOneMatched > playerTwoMatched){
       $('.winner').html('Player 1 wins!!!<br>' + playerOneMatched + ' to ' + playerTwoMatched);
     }
+    clearInterval(intervalId);
     $('.turn-display').text('');
   };
 
@@ -135,6 +150,7 @@ var startGame = function(num){
       secondCard = this;
       setTimeout(function(){checkMatch()}, 1000);
     }
+    startTimer();
   });
 
   //Mistake counter
@@ -194,6 +210,9 @@ $('#reset').on('click', function(){
   $('.mistake').html('');
   $('.mistake2P-1').html('');
   $('.mistake2P-2').html('');
+  clearInterval(intervalId);
+  intervalId = '';
+  $('.timer').html('');
   $('.winner').text('');
   $('.turn-display').text('');
   $('.game-section').hide();
