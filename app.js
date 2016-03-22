@@ -1,4 +1,5 @@
-$('.mistake').hide();
+// $('.mistake').hide();
+// $('.mistake2P').hide();
 
 var turnCount = 1.5;
 //Only shows turn if two-player
@@ -109,7 +110,13 @@ var startGame = function(num){
       $(firstCard).addClass('hidden');
       $(secondCard).addClass('hidden');
       //Increase mistake counter
-      mistakeNum++;
+      if(turnCount % 1 !== 0){
+        mistakeNum++;
+      } else if(turnCount % 2 === 0){
+        player2mistakes++;
+      } else {
+        player1mistakes++;
+      }
       mistakeCounter();
       showTurn();
     }
@@ -132,11 +139,28 @@ var startGame = function(num){
 
   //Mistake counter
   var mistakeNum = 0;
+  var player1mistakes = 0;
+  var player2mistakes = 0;
   var mistakeCounter = function(){
-    $('#mistake-counter').text(mistakeNum);
+    if(turnCount % 1 !== 0){
+      $('#mistake-counter').text(mistakeNum);
+    } else if(turnCount % 1 === 0){
+      $('#mistake-counterP1').text(player1mistakes);
+      $('#mistake-counterP2').text(player2mistakes);
+    }
   };
   mistakeCounter();
   showTurn();
+};
+
+//Displays the mistake fields
+var showMistakes = function(){
+  if(turnCount % 1 !== 0){
+    $('.mistake').html('Mistakes: <span id="mistake-counter">0</span>');
+  } else if(turnCount % 1 === 0){
+    $('.mistake2P-1').html('Player 1 Mistakes: <span id="mistake-counterP1">0</span>');
+    $('.mistake2P-2').html('Player 2 Mistakes: <span id="mistake-counterP2">0</span>');
+  }
 };
 
 //Selects how many cards will be played; shows relevent fields, hides irrelevent ones
@@ -146,8 +170,8 @@ $('.number').on('click',function(){
   $('h1').hide();
   $('p').hide();
   $('h3').hide();
-  $('.mistake').show();
   $('.game-section').show();
+  showMistakes();
   startGame(num);
 });
 
@@ -167,8 +191,11 @@ $('p').on('click', function(){
 //Reset button that clears everything
 $('#reset').on('click', function(){
   $('.card').remove();
-  $('.mistake').hide();
+  $('.mistake').html('');
+  $('.mistake2P-1').html('');
+  $('.mistake2P-2').html('');
   $('.winner').text('');
+  $('.turn-display').text('');
   $('.game-section').hide();
   $('h1').show();
   $('.number').show();
