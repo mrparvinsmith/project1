@@ -1,5 +1,5 @@
 var intervalId = '';
-
+$('.game-section').hide();
 var turnCount = 1.5;
 //Only shows turn if two-player
 var showTurn = function(){
@@ -16,9 +16,8 @@ var startGame = function(num){
   //Determines how many cards are used in play
   var playArray = [];
   var fullArray = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12];
-  var numOfCards = num;
   var cutDeck = function(){
-    for(var i = 0; i < numOfCards; i++){
+    for(var i = 0; i < num; i++){
       playArray.push(fullArray[i]);
     }
   };
