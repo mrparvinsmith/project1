@@ -70,7 +70,7 @@ var startGame = function(num){
     $('.timer').text(time + ' seconds');
   };
   showTime();
-    var startTimer = function(){
+  var startTimer = function(){
     if(intervalId === ''){
       intervalId = setInterval(function(){
         time++;
@@ -114,6 +114,7 @@ var startGame = function(num){
       $(firstCard).addClass('matched');
       $(secondCard).addClass('matched');
       givePoints();
+      turnCount++;
       showTurn();
       var totalMatched = 2 * (playerOneMatched + playerTwoMatched);
       //If all cards are '.matched', declare winner
@@ -133,11 +134,12 @@ var startGame = function(num){
         player1mistakes++;
       }
       mistakeCounter();
+      turnCount++;
       showTurn();
     }
     firstCard = '';
     secondCard = '';
-    turnCount++;
+    // turnCount++;
   };
 
   //On click, remove '.hidden' class; only hidden are clickable

@@ -47,3 +47,17 @@ body {
   margin-top: 98px;
   font-size: 37px;
 }
+@media screen and (max-width:480px) {
+  .info {
+    height: auto;
+  }
+  .winner {
+    margin-top: 8px;
+    font-size: 24px;
+  }
+  #reset {
+    position: static;
+    vertical-align: bottom;
+    margin: 5px;
+  }
+}
