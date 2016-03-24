@@ -166,8 +166,8 @@ var startGame = function(num){
     if(turnCount % 1 !== 0){
       $('#mistake-counter').text(mistakeNum);
     } else if(turnCount % 1 === 0){
-      $('#mistake-counterP1').text(player1mistakes);
-      $('#mistake-counterP2').text(player2mistakes);
+      $('#mistake-counter-p1').text(player1mistakes);
+      $('#mistake-counter-p2').text(player2mistakes);
     }
   };
   mistakeCounter();
@@ -179,8 +179,8 @@ var showMistakes = function(){
   if(turnCount % 1 !== 0){
     $('.mistake').html('Mistakes: <span id="mistake-counter">0</span>');
   } else if(turnCount % 1 === 0){
-    $('.mistake2P-1').html('Player 1 Mistakes: <span id="mistake-counterP1">0</span>');
-    $('.mistake2P-2').html('Player 2 Mistakes: <span id="mistake-counterP2">0</span>');
+    $('.mistake2p-1').html('Player 1 Mistakes: <span id="mistake-counter-p1">0</span>');
+    $('.mistake2p-2').html('Player 2 Mistakes: <span id="mistake-counter-p2">0</span>');
   }
 };
 
@@ -213,8 +213,8 @@ $('p').on('click', function(){
 $('#reset').on('click', function(){
   $('.card').remove();
   $('.mistake').html('');
-  $('.mistake2P-1').html('');
-  $('.mistake2P-2').html('');
+  $('.mistake2p-1').html('');
+  $('.mistake2p-2').html('');
   clearInterval(intervalId);
   intervalId = '';
   $('.timer').html('');
