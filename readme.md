@@ -13,4 +13,4 @@ The timer counts how many seconds the game lasts, starting on the first click on
 Once all cards are green the the game is over.  
     -If there are two players, the result will declare who won and how many matches each player made.  
 The reset button can be pressed at any time and will take the players back to the selection screen for the number of cards and players.  
-Play it [here](mrparvinsmith.github.io/project)!
+Play it [here](mrparvinsmith.github.io/project1)!
