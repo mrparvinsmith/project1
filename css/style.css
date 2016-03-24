@@ -21,10 +21,20 @@ body {
   margin-top: 5px;
   font-size: 24px;
 }
+.tournament-setup {
+  position: absolute;
+  bottom: 65px;
+  left: 16px;
+}
 #reset {
   position: absolute;
   bottom: 5px;
   left: 5px;
+}
+#next-game {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 .card {
   background: white;
@@ -45,7 +55,10 @@ body {
 }
 .winner {
   margin-top: 98px;
-  font-size: 37px;
+  font-size: 24px;
+}
+.tournament-score {
+  font-size: 24px;
 }
 @media screen and (max-width:480px) {
   .info {
@@ -57,10 +70,10 @@ body {
     margin-top: 8px;
     font-size: 24px;
   }
-  #reset {
+  #reset, .tournament-setup, #next-game {
     position: static;
     vertical-align: bottom;
-    margin: 5px;
+    /*margin: 5px;*/
   }
   .card {
     width: 50px;

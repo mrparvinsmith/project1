@@ -1,5 +1,13 @@
-var intervalId = '';
 $('.game-section').hide();
+$('.tournament-setup').hide();
+$('#next-game').hide();
+
+var intervalId = '';
+
+//Keeps track of games won in tournament
+var playerOneTournamentScore = 0;
+var playerTwoTournamentScore = 0;
+
 var turnCount = 1.5;
 //Only shows turn if two-player
 var showTurn = function(){
@@ -92,6 +100,27 @@ var startGame = function(num){
     }
   };
 
+  //Updates players with progress of tournament
+  var tournamentCheck = function(){
+    if(tournamentGoal > 1){
+      if(playerOneTournamentScore === tournamentGoal){
+        $('.tournament-score').html('Player 1 wins it all!!!<br>' + playerOneTournamentScore + ' to ' + playerTwoTournamentScore);
+      } else if(playerTwoTournamentScore === tournamentGoal){
+        $('.tournament-score').html('Player 2 wins it all!!!<br>' + playerTwoTournamentScore + ' to ' + playerOneTournamentScore);
+      } else {
+        $('.tournament-score').html('Player 1 games: ' + playerOneTournamentScore + '<br>Player 2 games: ' + playerTwoTournamentScore);
+        $('#next-game').show();
+      }
+    }
+  };
+
+  //The 'next game' button takes players to the next game in the tournament
+  $('#next-game').on('click', function(){
+    gameReset();
+    startGame(num);
+    showMistakes();
+  });
+
   //Says who the winner is; blanks turn-display
   var announceWinner = function(){
     if(turnCount % 1 !== 0){
@@ -100,11 +129,14 @@ var startGame = function(num){
       $('.winner').text('It\'s a tie!');
     } else if(playerTwoMatched > playerOneMatched){
       $('.winner').html('Player 2 wins!!!<br>' + playerTwoMatched + ' to ' + playerOneMatched);
+      playerTwoTournamentScore++;
     } else if(playerOneMatched > playerTwoMatched){
       $('.winner').html('Player 1 wins!!!<br>' + playerOneMatched + ' to ' + playerTwoMatched);
+      playerOneTournamentScore++;
     }
     clearInterval(intervalId);
     $('.turn-display').text('');
+    tournamentCheck();
     document.querySelector("#win-noise").play();
   };
 
@@ -185,12 +217,14 @@ var showMistakes = function(){
 };
 
 //Selects how many cards will be played; shows relevent fields, hides irrelevent ones
+var num = 0;
 $('.number').on('click',function(){
-  var num = $(this).text();
+  num = $(this).text();
   $('.number').hide();
   $('h1').hide();
   $('p').hide();
   $('h3').hide();
+  $('.tournament-setup').hide();
   $('.game-section').show();
   showMistakes();
   startGame(num);
@@ -202,27 +236,74 @@ $('p').on('click', function(){
     $('#one-player').html('&#10003');
     $('#two-player').html('');
     turnCount = 1.5;
+    $('#one-game').html('&#10003');
+    $('#three-games').html('');
+    $('#five-games').html('');
+    $('#seven-games').html('');
+    tournamentGoal = 1;
+    $('.tournament-setup').hide();
   } else {
     $('#two-player').html('&#10003');
     $('#one-player').html('');
     turnCount = 1;
+    $('.tournament-setup').show();
   }
 });
 
-//Reset button that clears everything
-$('#reset').on('click', function(){
+//If tournament, select how many games
+var tournamentGoal = 1;
+$('.tournament-select').on('click', function(){
+  if($(this).hasClass('best-of-one')){
+    $('#one-game').html('&#10003');
+    $('#three-games').html('');
+    $('#five-games').html('');
+    $('#seven-games').html('');
+    tournamentGoal = 1;
+  } else if($(this).hasClass('best-of-three')){
+    $('#three-games').html('&#10003');
+    $('#one-game').html('');
+    $('#five-games').html('');
+    $('#seven-games').html('');
+    tournamentGoal = 2;
+  } else if($(this).hasClass('best-of-five')){
+    $('#five-games').html('&#10003');
+    $('#one-game').html('');
+    $('#three-games').html('');
+    $('#seven-games').html('');
+    tournamentGoal = 3;
+  } else if($(this).hasClass('best-of-seven')){
+    $('#seven-games').html('&#10003');
+    $('#one-game').html('');
+    $('#three-games').html('');
+    $('#five-games').html('');
+    tournamentGoal = 4;
+  }
+});
+
+//Basic reset function to be used with either 'Reset' or 'Next Game' buttons
+var gameReset = function(){
   $('.card').remove();
   $('.mistake').html('');
   $('.mistake2p-1').html('');
   $('.mistake2p-2').html('');
-  clearInterval(intervalId);
-  intervalId = '';
   $('.timer').html('');
   $('.winner').text('');
+  $('.tournament-score').html('');
+  $('#next-game').hide();
+  intervalId = '';
+};
+
+//Reset button that clears everything
+$('#reset').on('click', function(){
+  clearInterval(intervalId);
+  gameReset();
   $('.turn-display').text('');
   $('.game-section').hide();
   $('h1').show();
   $('.number').show();
   $('h3').show();
   $('p').show();
+  if(turnCount % 1 === 0){
+    $('.tournament-setup').show();
+  }
 });
