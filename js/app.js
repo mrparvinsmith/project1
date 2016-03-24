@@ -117,6 +117,7 @@ var startGame = function(num){
   //The 'next game' button takes players to the next game in the tournament
   $('#next-game').on('click', function(){
     gameReset();
+    //calls 'num' from selection screen (line 221)
     startGame(num);
     showMistakes();
   });
