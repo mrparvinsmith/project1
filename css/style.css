@@ -50,7 +50,7 @@ body {
 @media screen and (max-width:480px) {
   .info {
     height: auto;
-    width: 94%;
+    width: 100%;
     border: none;
   }
   .winner {
