@@ -105,8 +105,7 @@ var startGame = function(num){
     }
     clearInterval(intervalId);
     $('.turn-display').text('');
-    // document.querySelector("#win-noise").play();
-    document.querySelector("#click-noise").play();
+    document.querySelector("#win-noise").play();
   };
 
   //Checks to see if two cards match
@@ -116,8 +115,7 @@ var startGame = function(num){
       $(firstCard).addClass('matched');
       $(secondCard).addClass('matched');
       givePoints();
-      // document.querySelector("#match-noise").play();
-      document.querySelector("#click-noise").play();
+      document.querySelector("#match-noise").play();
       turnCount++;
       showTurn();
       var totalMatched = 2 * (playerOneMatched + playerTwoMatched);
@@ -137,8 +135,7 @@ var startGame = function(num){
       } else {
         player1mistakes++;
       }
-      // document.querySelector("#wrong-noise").play();
-      document.querySelector("#click-noise").play();
+      document.querySelector("#wrong-noise").play();
       mistakeCounter();
       turnCount++;
       showTurn();
