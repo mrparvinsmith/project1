@@ -9,7 +9,7 @@ Only two cards' values will be revealed at a time.
         -The matched cards will no longer respond to clicks.  
     -If the values don't match, the values will be hidden again, yet remain unchanged.  
         -The game will keep track of how many mistakes are made by each player.  
-The timer counts how many seconds the game lasts, starting the first click on a card.  
+The timer counts how many seconds the game lasts, starting on the first click on a card.  
 Once all cards are green the the game is over.  
     -If there are two players, the result will declare who won and how many matches each player made.  
 The reset button can be pressed at any time and will take the players back to the selection screen for the number of cards and players.  
