@@ -298,6 +298,8 @@ var gameReset = function(){
 $('#reset').on('click', function(){
   clearInterval(intervalId);
   gameReset();
+  playerOneTournamentScore = 0;
+  playerTwoTournamentScore = 0;
   $('.turn-display').text('');
   $('.game-section').hide();
   $('h1').show();
