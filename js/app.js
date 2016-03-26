@@ -32,8 +32,8 @@ var startGame = function(num){
   cutDeck();
 
   //Shuffles cards put into playArray
-  var counter = playArray.length;
   var shuffle = function() {
+  var counter = playArray.length;
     while (counter > 0) {
        var index = Math.floor(Math.random() * counter);
        counter--;
@@ -41,7 +41,6 @@ var startGame = function(num){
        playArray[counter] = playArray[index];
        playArray[index] = temp;
     }
-    counter = playArray.length;
   };
 
   //Makes a card in each row
