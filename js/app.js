@@ -185,7 +185,7 @@ var startGame = function(num){
     } else if (secondCard === '' && $(this).hasClass('hidden')){
       $(this).removeClass('hidden');
       secondCard = this;
-      setTimeout(function(){checkMatch()}, 1000);
+      setTimeout(function(){checkMatch();}, 1000);
     }
     startTimer();
   });
